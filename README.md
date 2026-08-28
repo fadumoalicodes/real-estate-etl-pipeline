@@ -41,5 +41,23 @@ from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh1
 join [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh2
 on nvh1.ParcelID = nvh2.ParcelID
 where nvh1.PropertyAddress is null
+```
+
+### 3. Splitting Address Components (String Math)
+* **What it does:** Breaks a single, squashed address string into clean, separate columns for the street name and the city. It uses string functions to find the comma delimiter, slices the text at that exact boundary, and updates the new fields.
+```sql
+-- Breaking ADDRESS into Individual Coloumns (Address, City, State) Function --  the delimiter is a comma
+
+
+ALTER  TABLE NASHVILLEHOUSING
+ADD CITY varchar(255),
+SPLITADDRESS VARCHAR(255);
+
+
+UPDATE nashvillehousing
+SET CITY = SUBSTRING(PropertyAddress, CharINDEX(',', PropertyAddress) +1, Len(PropertyAddress)), 
+SPLITADDRESS = SUBSTRING(PropertyAddress, 1, CharINDEX(',', PropertyAddress) -1)
+```
+
 and nvh1.[UniqueID ] <> nvh2.[UniqueID ]
 ```
