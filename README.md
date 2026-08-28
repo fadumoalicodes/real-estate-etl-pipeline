@@ -23,3 +23,23 @@ SET SalesDateConverted = Convert(Date, SaleDate)
 
 
 ```
+### 2 .Filling Missing Property Addresses (Self-JOIN)
+* **What it does:** Finds records where the property address was left completely blank. It looks for other rows with the exact same Parcel ID but a different Unique ID, and uses that matching data to automatically fill in the missing address.
+```sql
+-- Select pass to verify the missing data and its replacement
+Select isnull(nvh1.propertyaddress, nvh2.PropertyAddress) as CorrectedPropertyAddress
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh1
+join [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh2
+on nvh1.ParcelID = nvh2.ParcelID
+where nvh1.PropertyAddress is null
+and nvh1.[UniqueID ] <> nvh2.[UniqueID ]
+
+-- Active update pass to permanently fix the blank fields
+UPDATE nvh1
+SET PropertyAddress = isnull(nvh1.propertyaddress, nvh2.PropertyAddress)
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh1
+join [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh2
+on nvh1.ParcelID = nvh2.ParcelID
+where nvh1.PropertyAddress is null
+and nvh1.[UniqueID ] <> nvh2.[UniqueID ]
+```
