@@ -52,12 +52,7 @@ where nvh1.PropertyAddress is null
 ALTER  TABLE NASHVILLEHOUSING
 ADD CITY varchar(255),
 SPLITADDRESS VARCHAR(255);
-
-
 UPDATE nashvillehousing
 SET CITY = SUBSTRING(PropertyAddress, CharINDEX(',', PropertyAddress) +1, Len(PropertyAddress)), 
 SPLITADDRESS = SUBSTRING(PropertyAddress, 1, CharINDEX(',', PropertyAddress) -1)
-```
-
-and nvh1.[UniqueID ] <> nvh2.[UniqueID ]
 ```
