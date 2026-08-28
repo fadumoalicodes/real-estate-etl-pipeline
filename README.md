@@ -135,6 +135,7 @@ from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
 -- quesiton 6 - REMOVING duplicates using row numbers!
 
 
+
 WITH ROWSS AS (
 Select *, 
 Row_Number() over (partition by ParcelID, PropertySplitAddress, SalePrice, SalesDateConverted, Legalreference order by uniqueid) as RNN
@@ -150,4 +151,18 @@ WHERE RNN > 1)
 DELETE 
 FROM FINAL
 WHERE RNN > 1
+```
+### 7. Removing Unused Columns
+* **What it does:** Drops the old, uncorrected, or unparsed columns that are no longer needed for reporting. This cleans up the table layout and optimizes database storage.
+
+```sql
+--- deleting unused coloumns that we wont use in analysis (all the uncorrected  columns)
+-- usually do not delete any coloumns from permenant data
+-- 
+
+ALTER TABLE nashvillehousing
+DROP  COLUMN  SaleDate, PropertyAddress, OwnerAddress, OwnerName, legalreference, taxdistrict
+
+select *
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
 ```
