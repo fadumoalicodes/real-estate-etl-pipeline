@@ -61,7 +61,7 @@ SPLITADDRESS = SUBSTRING(PropertyAddress, 1, CharINDEX(',', PropertyAddress) -1)
 * **What it does:** Uses string matching functions to cut text apart without relying on normal commas or periods.
 
 ```sql
---question 4 : Split OwnerAddress into 3 coloumns (address, City, State)
+--Split OwnerAddress into 3 coloumns (address, City, State)
 
 Select OwnerAddress
 from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
@@ -87,7 +87,7 @@ OwnerSplitState = parsename(replace(owneraddress, ',', '.'), 1)
 ### 5. Fixing Yes/No Typos
 * **What it does:** Finds messy data entry columns (like "Y", "N", "Yes", "No") and changes them all to match perfectly.
 ```sql
--- Question 5 - Change Y to Yes and N to No in SoldAsVacant
+-- Change Y to Yes and N to No in SoldAsVacant
 
 
 select distinct (SoldAsVacant), Count(SoldAsVacant) as NumberOfRows
@@ -132,7 +132,7 @@ from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
 * **What it does:** Finds and deletes duplicate entries where identical property details were logged multiple times. It assigns unique row numbers inside matching data groups and uses a CTE loop to permanently remove the extra rows from the physical table.
 
 ```sql
--- quesiton 6 - REMOVING duplicates using row numbers!
+-- REMOVING duplicates using row numbers!
 
 
 
