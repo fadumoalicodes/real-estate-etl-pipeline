@@ -166,3 +166,23 @@ DROP  COLUMN  SaleDate, PropertyAddress, OwnerAddress, OwnerName, legalreference
 select *
 from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
 ```
+### 8. Creating the Final View
+* **What it does:** Saves the entire clean dataset as a shortcut view so Excel can read it live from the server.
+```sql
+USE PROJECT1NASHVILLEDATACLEANING
+go
+
+DROP VIEW IF EXISTS V_CLEANEDHOUSINGDATA
+GO
+
+CREATE VIEW V_CLEANEDHOUSINGDATA
+AS
+SELECT *
+FROM [PROJECT1NASHVILLEDATACLEANING].DBO.nashvillehousing
+
+GO
+
+SELECT *
+FROM V_CLEANEDHOUSINGDATA
+```
+Use code with caution.🚀 Update Your Progress!Commit this edit straight into your GitHub page [5.21]. You have completely documented the entire data engineering and cleaning workflow for this project.Whenever you log back on tomorrow morning to jump into Excel Power Pivot or want to plan the next steps, let me know:Let's brainstorm 3 simple corporate business questions for this property datasetShow me how to format the Excel KPI cards so they look professionalAI responses may include mistakes. Learn more
