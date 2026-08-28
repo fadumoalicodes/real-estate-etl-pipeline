@@ -57,3 +57,97 @@ UPDATE nashvillehousing
 SET CITY = SUBSTRING(PropertyAddress, CharINDEX(',', PropertyAddress) +1, Len(PropertyAddress)), 
 SPLITADDRESS = SUBSTRING(PropertyAddress, 1, CharINDEX(',', PropertyAddress) -1)
 ```
+### 4. Splitting Address Columns (Alternative Method)
+* **What it does:** Uses string matching functions to cut text apart without relying on normal commas or periods.
+
+```sql
+--question 4 : Split OwnerAddress into 3 coloumns (address, City, State)
+
+Select OwnerAddress
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
+
+Select ParseName(Replace(OwnerAddress,',','.'),3) as ownerSplitAddress,
+parsename(Replace(OwnerAddress, ',','.'), 2) as ownerSplitCity,
+parsename(replace(owneraddress, ',', '.'), 1) as ownderSplitState
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
+
+begin transaction 
+alter table nashvillehousing
+add OwnerSplitAddress varchar(255),
+OwnerSplitCity varchar(255),
+OwnerSplitState varchar(255)
+
+commit transaction
+
+Update nashvillehousing
+SET OwnerSplitAddress = ParseName(Replace(OwnerAddress,',','.'),3),
+OwnerSplitCity = parsename(Replace(OwnerAddress, ',','.'), 2),
+OwnerSplitState = parsename(replace(owneraddress, ',', '.'), 1)
+```
+### 5. Fixing Yes/No Typos
+* **What it does:** Finds messy data entry columns (like "Y", "N", "Yes", "No") and changes them all to match perfectly.
+```sql
+-- Question 5 - Change Y to Yes and N to No in SoldAsVacant
+
+
+select distinct (SoldAsVacant), Count(SoldAsVacant) as NumberOfRows
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing 
+Group by SoldAsVacant
+order by NumberOfRows
+
+Select distinct(S.A)
+From
+(
+Select case
+when SoldAsVacant = 'Y' then 'Yes'
+when SoldAsVacant = 'N' then 'No'
+Else SoldAsVacant
+End  as A
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing)  as S
+
+Select case
+when SoldAsVacant = 'Y' then 'Yes'
+when SoldAsVacant = 'N' then 'No'
+Else SoldAsVacant
+End 
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
+
+begin transaction
+ALTER TABLE Nashvillehousing
+ADD NewSoldAsVacant varchar(255)
+commit transaction
+
+
+UPDATE nashvillehousing
+SET NewSoldAsVacant = case
+when SoldAsVacant = 'Y' then 'Yes'
+when SoldAsVacant = 'N' then 'No'
+Else SoldAsVacant
+End 
+
+select *
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
+```
+### 6. Removing Duplicates Using Row Numbers
+* **What it does:** Finds and deletes duplicate entries where identical property details were logged multiple times. It assigns unique row numbers inside matching data groups and uses a CTE loop to permanently remove the extra rows from the physical table.
+
+```sql
+-- quesiton 6 - REMOVING duplicates using row numbers!
+
+
+WITH ROWSS AS (
+Select *, 
+Row_Number() over (partition by ParcelID, PropertySplitAddress, SalePrice, SalesDateConverted, Legalreference order by uniqueid) as RNN
+from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing
+)
+,
+FINAL AS (
+SELECT *
+FROM ROWSS
+WHERE RNN > 1) 
+
+
+DELETE 
+FROM FINAL
+WHERE RNN > 1
+```
