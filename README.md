@@ -41,6 +41,7 @@ from [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh1
 join [PROJECT1NASHVILLEDATACLEANING].dbo.nashvillehousing as nvh2
 on nvh1.ParcelID = nvh2.ParcelID
 where nvh1.PropertyAddress is null
+and nvh1.[UniqueID ] <> nvh2.[UniqueID ]
 ```
 
 ### 3. Splitting Address Components (String Math)
