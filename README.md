@@ -185,3 +185,20 @@ GO
 SELECT *
 FROM V_CLEANEDHOUSINGDATA
 ```
+## Part 2: Property Valuation & Market Trends Dashboard (Real Estate Analytics Layer)
+
+This section shows the interactive real estate dashboard built inside Microsoft Excel. It turns thousands of messy housing rows into a clean, easy-to-read screen that helps managers see price trends, neighbor values, and building age patterns instantly.
+
+###  Section 2a: Top Summary Numbers (KPI Cards)
+* **KPI 1 - Total Homes Sold:** Counts every property sale tracked in the data to show the complete size of the housing market.
+* **KPI 2 - Record Breaking Sale Price:** Finds the single most expensive property ever sold to highlight the maximum market ceiling.
+* **KPI 3 - Average Sale Price:** Calculates the middle-ground, standard value of a home to show what a normal house costs.
+* **KPI 4 - Number of New Developments:** Counts exactly how many brand-new properties were built and sold in recent years.
+
+---
+
+### Section 2b: The Main Charts
+* **Chart 1 - Home Sales Over Time (Combo Chart):** Tracks monthly home sales and average prices at the same time on a timeline to show summer spikes and winter dips.
+* **Chart 2 - Property Types Per Neighbourhood (100% Stacked Chart):** Shows the mix of houses (like Single Family vs. Duplex) in each town using percentages so you can compare tiny zones against big cities easily.
+* **Chart 3 - Average Sale Price Per Neighbourhood (Horizontal Bar):** Ranks the priciest towns from top to bottom so real estate investors get a quick cheat sheet of expensive zones.
+* **Chart 4 - Average Sale Price Vs Year Built (Column Chart):** Groups homes by the decade they were built to prove whether buyers pay a premium for old historic charm or brand-new modern builds.
