@@ -187,7 +187,7 @@ FROM V_CLEANEDHOUSINGDATA
 ```
 ## Part 2: Property Valuation & Market Trends Dashboard (Real Estate Analytics Layer)
 
-This section shows the interactive real estate dashboard built inside Microsoft Excel. It turns thousands of messy housing rows into a clean, easy-to-read screen that helps managers see price trends, neighbor values, and building age patterns instantly.
+This section shows the interactive real estate dashboard built inside Microsoft Excel. It turns thousands of  housing rows into a clean, easy-to-read screen that helps managers see price trends, neighbor values, and building age patterns instantly.
 
 ###  Section 2a: Top Summary Numbers (KPI Cards)
 * **KPI 1 - Total Homes Sold:** Counts every property sale tracked in the data to show the complete size of the housing market.
