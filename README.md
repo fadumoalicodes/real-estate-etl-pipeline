@@ -1,9 +1,9 @@
-# real-estate-etl-pipeline
+# Property Valuation And Market Trends 
 Cleaning a messy 56,000-row house sales dataset using SQL Server, then linking the final cleaned view to an interactive Excel Dashboard
 
 ### Tools Used
 * **Database:** SQL Server (T-SQL)
-* **Dashboard:**  EXCEL Pivot Charts including Slides and Timelines + KPIs
+* **Dashboard:**  EXCEL Pivot Charts including Slicers and Timelines + KPIs
 
 
 ## Part 1: Cleaning the Data with SQL
