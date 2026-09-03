@@ -5,6 +5,8 @@ Cleaning a messy 56,000-row house sales dataset using SQL Server, then linking t
 * **Database:** SQL Server (T-SQL)
 * **Dashboard:**  EXCEL Pivot Charts including Slicers and Timelines + KPIs
 
+![Dashboard Preview](property-dashboard-preview.png)
+
 
 ## Part 1: Cleaning the Data with SQL
 
